@@ -94,6 +94,17 @@ public class ScannerHelper {
 	}
 	
 	/**
+	 * Ask user for input, return the input as a String
+	 * @param askMessage
+	 * @return
+	 */
+	
+	public String askForAndGetNextString(String askMessage){
+		return askForAndGetNextString(askMessage, true); 
+		// NOTE: case sensitivity does nothing here, since no options are passed along
+	}
+	
+	/**
 	 * Generic method, mimicking contains() method for Lists, for arrays
 	 * <p>
 	 * NOTE that if used on strings, this will be case sensitive
