@@ -45,17 +45,20 @@ public class ListHelper {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public <T, U extends T> List<U> getSubListOfSameListType(List<T> list, Class<U> classToMatch) throws InstantiationException, IllegalAccessException{
+	public <T, U extends T, V extends List<U>, S> V getSubListOfSameListType(	List<T> list, 
+																					Class<U> classToMatch, 
+																					Class<V> listReturnType) throws InstantiationException, IllegalAccessException{
 		
-		Class listType = list.getClass();
-		List<U> subList = (List<U>) listType.newInstance();
+		List<U> subList = listReturnType.newInstance();
 		
 		for(T t : list){
+			// if object of type T matches the class we want - add it do list
 			if(classToMatch.isInstance(t)){
 				subList.add((U) t);
 			}
 		}
-		return subList;
+		
+		return (V) subList;
 	}
 	
 }
