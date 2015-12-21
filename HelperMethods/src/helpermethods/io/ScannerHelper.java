@@ -50,6 +50,7 @@ public class ScannerHelper {
 			}
 			
 		} while (true);
+
 		
 		return input;
 	}

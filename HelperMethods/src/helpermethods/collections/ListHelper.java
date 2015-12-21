@@ -1,8 +1,8 @@
 package helpermethods.collections;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class ListHelper {
 
@@ -94,8 +94,38 @@ public class ListHelper {
 		return subList;
 	}
 	
+	public <T> List<T> filterUsingPredicate(List<T> list, Predicate<T> filterByMe ){
+		return list.stream()
+				.filter(filterByMe)
+				.collect(Collectors.toList());
+	}
 	
 	
+	@SafeVarargs
+	public final <T> List<T> filterUsingSeveralPredicates(	List<T> list, 
+														Predicate<T> firstPred, 
+														Predicate<T>... restOfPreds) {
+	
+		Predicate<T> predicate = firstPred;	
+		if(restOfPreds.length != 0){
+			for(Predicate<T> predToAdd : restOfPreds){
+				predicate = predicate.and(predToAdd);
+			}
+		}
+
+		return list.stream()
+				.filter(predicate)
+				.collect(Collectors.toList());
+	}
+	
+	
+	
+	public <T extends Number> T addNumbers(T num1, T num2){
+		Double a = new Double(num1.doubleValue());
+		Double b = new Double(num2.doubleValue());
+		
+		return (T) a;
+	}
 	
 	
 	
